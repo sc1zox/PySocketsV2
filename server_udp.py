@@ -1,11 +1,11 @@
 import socket
 
-server_address = ('127.0.0.1',4000)
+server_address = ('127.0.0.1',4001)
 sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 sock.bind(server_address)
 
-while True:
-    try:
+try:
+    while True:
         print(f'server is running on: {server_address}')
         response, client_addr = sock.recvfrom(4096)
         response_decoded = response.decode('utf-8')
@@ -16,7 +16,7 @@ while True:
 
         sock.sendto(message_encoded, client_addr)
 
-    except KeyboardInterrupt:
-        break
-    finally:
+except KeyboardInterrupt:
+    print('stopped')
+finally:
         sock.close()
