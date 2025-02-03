@@ -19,13 +19,13 @@ while True:
         readable,_,_ = select.select(socket_list,[],[])
         for socket in readable:
             if socket == socket_udp:
-                response, address = socket_udp.recvfrom(4096)
+                response, address = socket.recvfrom(4096)
                 response_decoded = response.decode('utf-8')
                 print(f'Client said {response_decoded} from {address}')
 
                 message = 'udp is dope'
                 message_encoded = message.encode('utf-8')
-                socket_udp.sendto(message_encoded,address)
+                socket.sendto(message_encoded,address)
             else:
                 connection, address = socket_tcp.accept()
 

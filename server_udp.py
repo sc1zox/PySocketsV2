@@ -10,8 +10,9 @@ try:
         response, client_addr = sock.recvfrom(4096)
         response_decoded = response.decode('utf-8')
 
-        print(f' the response was {response_decoded}')
+        print(f' the message was {response_decoded}')
         message = 'udp sucks'
+        print(f'sending.... {message}')
         message_encoded = message.encode('utf-8')
 
         sock.sendto(message_encoded, client_addr)
