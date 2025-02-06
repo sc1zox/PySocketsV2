@@ -1,23 +1,22 @@
 import socket
 
-server_address = ('127.0.0.1',4001)
+server_address = ('127.0.0.1',4712)
 sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 sock.bind(server_address)
+print('running')
 
 try:
     while True:
-        print(f'server is running on: {server_address}')
-        response, client_addr = sock.recvfrom(4096)
-        response_decoded = response.decode('utf-8')
+        msg, addr = sock.recvfrom(4096)
 
-        print(f' the message was {response_decoded}')
-        message = 'udp sucks'
-        print(f'sending.... {message}')
-        message_encoded = message.encode('utf-8')
+        msg_dc = msg.decode('utf-8')
+        print(f'{msg_dc}')
 
-        sock.sendto(message_encoded, client_addr)
+        msg_new = 'fk this'.encode('utf-8')
+
+        sock.sendto(msg_new,addr)
 
 except KeyboardInterrupt:
-    print('stopped')
-finally:
-        sock.close()
+    print('server stopped')
+
+sock.close()
